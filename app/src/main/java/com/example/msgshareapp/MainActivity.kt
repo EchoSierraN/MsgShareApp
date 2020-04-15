@@ -16,14 +16,17 @@ class MainActivity : AppCompatActivity() {
         btnShowToast.setOnClickListener {
             Log.i("MainActivity", "Button was clicked.")
 
-            Toast.makeText(this, "Button was clicked!", Toast.LENGTH_SHORT).show()
+            //Toast.makeText(this, "Button was clicked!", Toast.LENGTH_SHORT).show()
         }
 
         btnSendMessageToNextActivity.setOnClickListener {
             val message: String= etUserMessage.text.toString()
             Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
 
+            /* next two lines-- Explicit intent declaration: we know what activity to use for the
+            intent (intention or process) */
             val intent= Intent(this, SecondActivity::class.java)
+            intent.putExtra("user_message", message)
             startActivity(intent)
         }
     }
