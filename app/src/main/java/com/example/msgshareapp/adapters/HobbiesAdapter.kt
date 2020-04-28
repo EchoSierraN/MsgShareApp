@@ -12,11 +12,12 @@ import com.example.msgshareapp.R
 import com.example.msgshareapp.showToast
 import kotlinx.android.synthetic.main.list_item.view.*
 
-class HobbiesAdapter(val context: Context, private val hobbies: List<Hobby>) : RecyclerView.Adapter<HobbiesAdapter.MyViewHolder>(){
-    inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
+class HobbiesAdapter(val context: Context, private val hobbies: List<Hobby>) :
+    RecyclerView.Adapter<HobbiesAdapter.MyViewHolder>() {
+    inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        var currentHobby: Hobby?= null
-        var currentPos: Int= 0
+        var currentHobby: Hobby? = null
+        var currentPos: Int = 0
 
         init {
             itemView.setOnClickListener {
@@ -25,27 +26,32 @@ class HobbiesAdapter(val context: Context, private val hobbies: List<Hobby>) : R
             }
 
             itemView.imgShare.setOnClickListener {
-                val message: String= "My hobby is ${currentHobby!!.title}"
 
-                val intent= Intent()
-                intent.action= Intent.ACTION_SEND
-                intent.putExtra(Intent.EXTRA_TEXT, message)
-                intent.type= "text/plain"
-                context.startActivity(Intent.createChooser(intent, "Share to:"))
+                currentHobby?.let {
+                    val message: String = "My hobby is ${currentHobby!!.title}"
+
+                    val intent = Intent()
+                    intent.action = Intent.ACTION_SEND
+                    intent.putExtra(Intent.EXTRA_TEXT, message)
+                    intent.type = "text/plain"
+                    context.startActivity(Intent.createChooser(intent, "Share to:"))
+                }
             }
         }
 
         fun setData(hobby: Hobby?, pos: Int) {
-            itemView.txvTitle.text= hobby!!.title
+            hobby?.let {
+                itemView.txvTitle.text = hobby.title
 
-            this.currentHobby= hobby
-            this.currentPos= pos
+                this.currentHobby = hobby
+                this.currentPos = pos
+            }
         }
 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val view= LayoutInflater.from(context).inflate(R.layout.list_item, parent, false)
+        val view = LayoutInflater.from(context).inflate(R.layout.list_item, parent, false)
         return MyViewHolder(view)
     }
 
@@ -54,7 +60,7 @@ class HobbiesAdapter(val context: Context, private val hobbies: List<Hobby>) : R
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val hobby= hobbies[position]
+        val hobby = hobbies[position]
         holder.setData(hobby, position)
     }
 }
