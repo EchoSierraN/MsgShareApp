@@ -1,10 +1,11 @@
-package com.example.msgshareapp
+package com.example.msgshareapp.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
+import com.example.msgshareapp.R
+import com.example.msgshareapp.showToast
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -21,7 +22,8 @@ class MainActivity : AppCompatActivity() {
 
         btnSendMessageToNextActivity.setOnClickListener {
             val message: String= etUserMessage.text.toString()
-            Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+            showToast(message)
+            //Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
 
             /* next two lines-- Explicit intent declaration: we know what activity to use for the
             intent (intention or process) */

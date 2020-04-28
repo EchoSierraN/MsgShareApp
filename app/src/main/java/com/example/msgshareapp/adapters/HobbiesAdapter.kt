@@ -1,4 +1,4 @@
-package com.example.msgshareapp
+package com.example.msgshareapp.adapters
 
 import android.content.Context
 import android.content.Intent
@@ -7,10 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.activity_main.*
+import com.example.msgshareapp.models.Hobby
+import com.example.msgshareapp.R
+import com.example.msgshareapp.showToast
 import kotlinx.android.synthetic.main.list_item.view.*
 
-class HobbiesAdapter(val context: Context,val hobbies: List<Hobby>) : RecyclerView.Adapter<HobbiesAdapter.MyViewHolder>(){
+class HobbiesAdapter(val context: Context, private val hobbies: List<Hobby>) : RecyclerView.Adapter<HobbiesAdapter.MyViewHolder>(){
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
 
         var currentHobby: Hobby?= null
@@ -18,7 +20,8 @@ class HobbiesAdapter(val context: Context,val hobbies: List<Hobby>) : RecyclerVi
 
         init {
             itemView.setOnClickListener {
-                Toast.makeText(context, "${currentHobby!!.title} clicked.", Toast.LENGTH_SHORT).show()
+                context.showToast("${currentHobby!!.title} clicked.")
+                //Toast.makeText(context, "${currentHobby!!.title} clicked.", Toast.LENGTH_SHORT).show()
             }
 
             itemView.imgShare.setOnClickListener {
